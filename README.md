@@ -1,1 +1,0 @@
-# antra_uzduotis
