@@ -29,7 +29,7 @@ int main ()
         cout << "Iveskite savo varda ir pavarde" << endl;
         cin >> A[i].vardas >> A[i].pavarde;
 
-        int a; //zmogaus ivestas skaicius skirtas pasirinkti
+        int a; //skaicius skirtas pasirinkti
 
         cout << "Jei norite generuoti rezultatus automatiskai spauskite 0. Jei norite ivesti patys spauskite 1:" << endl;
         cin >> a;
