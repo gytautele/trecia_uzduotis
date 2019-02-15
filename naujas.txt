@@ -67,7 +67,7 @@ int main ()
                 }
                 kiek++;
             }
-
+            
             int laik; //laikinas kintamasis rikiavimui
             for (int k=0; k<kiek-1; k++)
                 for (int l=i+1; l<kiek; l++)
