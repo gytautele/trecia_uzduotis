@@ -6,6 +6,7 @@ using std::cout;
 using std::string;
 using std::endl;
 using std::cin;
+using std::setw;
 
 struct mok
 {
@@ -36,13 +37,33 @@ int main ()
             cin >> n;
         }
 
+        int a; //zmogaus ivestas skaicius skirtas pasirinkti
+
+        cout << "Jei norite generuoti rezultatus automatiskai spauskite 0. Jei norite ivesti patys spauskite 1:" << endl;
+        cin >> a;
+
         double sum = 0; //suma
-        cout << "Iveskite namu darbu rezultatus" << endl;
 
+        if (a==1)
+        {
+            cout << "Iveskite namu darbu rezultatus" << endl;
 
-        for (int j = 0; j < n; j++) {
-            cin >> A[i].nd[j];
-            sum+=A[i].nd[j];
+            for (int j = 0; j < n; j++) {
+                cin >> A[i].nd[j];
+                sum+=A[i].nd[j];
+            }
+
+        }
+
+        else
+        {
+            for (int j = 0; j < n; j++) {
+                A[i].nd[j]=rand()%10;
+                cout << A[i].nd[j] << endl;
+                sum+=A[i].nd[j];
+                cout << sum << endl;
+                cout << "-----------------" << endl;
+            }
         }
 
         int egz; //egzamino rezultatas
@@ -78,11 +99,12 @@ int main ()
 
     }
 
+    cout << "Pavarde" <<std::right << setw(20) << "Vardas" << std::right <<setw(20) << "VidGalutinis" << std::right << setw(20) << "MedGalutinis" << endl;
+    cout << "------------------------------------------------------------------------" << endl;
+
     for (int i=0; i<m; i++)
     {
-        cout << "Pavarde" << "  " << "Vardas" << "  " << "VidGalutinis" << "MedGalutinis" << endl;
-        cout << "----------------------------------------------------------" << endl;
-        cout << A[i].pavarde << "      " << A[i].vardas << "      " << std::fixed << std::setprecision(2) << A[i].galutinis << "     " << A[i].med << endl;
+        cout << A[i].pavarde << std::right << setw(20) << A[i].vardas << std::right << setw(20) << std::fixed << std::setprecision(2) << std::right << A[i].galutinis << setw(20) << std::right << A[i].med << endl;
     }
 
 }
