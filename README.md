@@ -14,8 +14,9 @@ Programą galima naudoti:
 
 Tekstinio failo pavyzdys:
 ```shell
-Vardas   Pavarde   ND1   ND2   ND3   Egzaminas
-Matas    Cenys     8     9     6     9
-Arvydas  Sabonis   10    7           10
+Pavardė     Vardas      ND1  ND2   ND3  ND4  ND5  Egzaminas
+Vardas1     Pavardė1    8    9     10   6    10   9
+Vardas2     Pavardė2    7    10    8    5    4    6
+...
 ```
 ## Versijų istorija
