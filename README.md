@@ -1,5 +1,7 @@
 # 2 užduotis
+
 ## Programos tikslas
+
 Programa nuskaito mokinio duomenis, paskaičiuoja galutinį studento pažymį naudojant vidurkį ir medianą.
 ```shell
 Pavardė     Vardas   Galutinis (Vid.)    Galutinis (Med.)
@@ -8,6 +10,7 @@ Arvydas     Sabonis      x.xx               x.xx
 Rimas       Kurtinaitis  y.yy               y.yy
 ```
 ## Programos naudojimas
+
 Programą galima naudoti:
 *įvedant rezultatus
 *nuskaitant rezultatus iš tekstinio failo
