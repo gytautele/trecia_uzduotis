@@ -11,9 +11,7 @@ Rimas       Kurtinaitis  y.yy               y.yy
 ```
 ## Programos naudojimas
 
-Programą galima naudoti:
-*įvedant rezultatus
-*nuskaitant rezultatus iš tekstinio failo
+Programą galima naudoti įvedant rezultatus pačiam arba nuskaitant rezultatus iš tekstinio failo.
 
 Tekstinio failo pavyzdys:
 ```shell
