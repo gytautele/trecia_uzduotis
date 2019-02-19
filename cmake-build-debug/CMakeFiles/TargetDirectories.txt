@@ -1,3 +1,0 @@
-C:/Users/Admin/CLionProjects/antra_uzduotis/cmake-build-debug/CMakeFiles/antra_uzduotis.dir
-C:/Users/Admin/CLionProjects/antra_uzduotis/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Admin/CLionProjects/antra_uzduotis/cmake-build-debug/CMakeFiles/rebuild_cache.dir
