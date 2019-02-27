@@ -1,6 +1,6 @@
 #include "circle.h"
 
-//-----------------------------------------
+//------------------------------
 int pasirinkimas ()
 {
     int f; //pasirinkimui
@@ -141,7 +141,6 @@ void skaitymas (vector<mok> &duomenys, int &nr) {
                 cout << msg << endl;
                 break;
             }
-
         duomenys.push_back(mok());
         std::istringstream in_line(eil);
         in_line >> vard >> pav;
@@ -189,4 +188,4 @@ void rikiavimas (vector<mok> &duomenys, int &nr)
 
             }
 }
-//----------------------------
+//-----------------------

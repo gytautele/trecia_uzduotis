@@ -31,20 +31,20 @@ int main () {
             }
         }
     }
-        else
+    else
+    {
+        int nr=0;
+        skaitymas(duomenys, nr);
+        for (int i=0; i<nr; i++)
         {
-            int nr=0;
-            skaitymas(duomenys, nr);
-            for (int i=0; i<nr; i++)
-            {
-                mediana(duomenys, i);
-                vidurkis(duomenys, i);
-                if (i==0) remelis();
-                rikiavimas(duomenys, nr);
-                spausdinimas (duomenys, i);
-            }
-
+            mediana(duomenys, i);
+            vidurkis(duomenys, i);
+            if (i==0) remelis();
+            rikiavimas(duomenys, nr);
+            spausdinimas (duomenys, i);
         }
-        return 0;
+
     }
-    //-----------------------
+
+    return 0;
+}

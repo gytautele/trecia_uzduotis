@@ -50,3 +50,4 @@ void remelis ();
 void rikiavimas (vector<mok> &duomenys, int &nr);
 
 #endif //MAIN_SU_TXT_CIRCLE_H
+
