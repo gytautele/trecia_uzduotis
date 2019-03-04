@@ -36,6 +36,8 @@ Vardas2     Pavardė2    7    10    8    5    4    6
 
 * v0.3.1 isskaidyta_programa+txt - Pridėtas tekstinis failas.
 
+* v0.4.1 5_txt_generacija - Pridėta funkcija, kurioje galima generuoti 5 šabloninius .txt failus. Sugrįžta prie ištisos programos. Galutinėje versijoje programa taip pat bus išskaidyta.
 
+* v0.4 tekstiniu_generacija_ir_laiko_skaiciavimas - Sugeneruoti penki šabloniniai sąrašai. Studentai padalinti į dvi kategorijas. Atlikta programos veikimo analizė.
 
 
