@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iomanip>
 #include <stdlib.h>
+#include <chrono>
 
 using std::cout;
 using std::string;
@@ -45,19 +46,50 @@ void spausdinimas(vector<mok> &duomenys, int i);
 void skaitymas (vector<mok> &duomenys, int &nr);
 void remelis ();
 void rikiavimas (vector<mok> &duomenys, int &nr);
-void generuoti_txt();
+void generuoti_txt(int i, int &nr);
+void skaitymas_gen (vector<mok> &duomenys, int &i);
+void rezultatu_skaidymas(vector<mok> &duomenys, int &i);
 
 int main () {
 
     vector<mok> duomenys;
 
+    auto startas = std::chrono::system_clock::now();
+
     int jj;
     cout << "Jei norite generuoti 5 tekstinius failus, spauskite 5" << endl;
     cin >>jj;
 
+    int nr=1;
+
     if (jj==5) {
-        generuoti_txt();
+
+        for (int i=0; i<4; i++)
+        {
+            nr=nr*10;
+            generuoti_txt(i, nr);
+            skaitymas_gen (duomenys, i);
+
+            for (int j=0; j<nr; j++)
+            {
+                mediana(duomenys, j);
+                vidurkis(duomenys, j);
+                //spausdinimas (duomenys, j);
+                rezultatu_skaidymas (duomenys, j);
+
+            }
+
+            if (nr==100) break;
+
+        }
+
     }
+
+    auto pabaiga = std::chrono::system_clock::now();
+    auto uztruko = std::chrono::duration_cast<
+            std::chrono::duration<double> >(pabaiga - startas).count();
+    cout << "Failo generavimas ir skaitymas uztruko: " << uztruko << " sekundziu" << endl;
+
 
     int m = 0;
 
@@ -284,13 +316,14 @@ void rikiavimas (vector<mok> &duomenys, int &nr)
             }
 }
 //-----------------------
-void generuoti_txt()
+void generuoti_txt(int i, int &nr)
 {
-    std::ofstream outfile ("test.txt");
+    string file_name[5]={"test.txt", "test1.txt", "test2.txt", "test3.txt", "test4.txt"};
 
     srand (time(NULL));
     int laik;
-    int nr=10;
+
+    std::ofstream outfile (file_name[i]);
 
     for (int i=0; i<nr; i++)
     {
@@ -305,81 +338,77 @@ void generuoti_txt()
         outfile << std::endl;
     }
 
-        outfile.close();
+    outfile.close();
+}
+//--------------------------------------------------
+void skaitymas_gen (vector<mok> &duomenys, int &i) {
 
-    std::ofstream outfilee ("test1.txt");
+    int y = 0;
+    string temp;
+    string eil, vard, pav;
+    string file_name[5]={"test.txt", "test1.txt", "test2.txt", "test3.txt", "test4.txt"};
+    std::ifstream in_file(file_name[i]);
 
-    nr*=10;
+    int sk = 0;
+    int h=0;
+    int j=0; //vardu skaicius
 
-    for (int i=0; i<nr; i++)
-    {
-        outfilee << "Vardas" << i << " " << "Pavarde" << i << " ";
+    while (std::getline(in_file, eil)) {
+        duomenys.push_back(mok());
+        std::istringstream in_line(eil);
+        in_line >> vard >> pav;
+        duomenys[j].vardas = vard;
+        duomenys[j].pavarde = pav;
+        j++;
 
-        for (int j = 0; j <5; j++) {
+        while (in_line >> temp) {
+            int ivedu = std::stoi(temp); //pavercia string i integer
+            if (ivedu >= 0 && ivedu <= 10) {
+                duomenys[sk].nd.push_back(ivedu);
+                duomenys[sk].sum+=ivedu;
+                duomenys[sk].paz_sk++;
+            }
+        }
+        cout << duomenys[sk].sum << endl;
+        sk++;
 
-            laik = rand() % 10 + 1;
-            outfilee << laik << " ";
+
+        in_line.end;
+
+        int egz = 0;
+        int y=0;
+
+        egz = duomenys[h].nd[duomenys[h].paz_sk-1];
+        duomenys[h].egz=egz;
+
+        h++;
+        duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
+        duomenys[sk-1].sum=duomenys[sk-1].sum-duomenys[h-1].egz;
+        duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
+    }
+}
+//-------------------------
+void rezultatu_skaidymas(vector<mok> &duomenys, int &i)
+{
+    string file_name[2]={"kietiakai.txt", "silpnuoliai.txt"};
+
+    std::ofstream outfile (file_name[0], std::ios::app);
+    std::ofstream outfil (file_name[1], std::ios::app);
+
+    duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 *(double) duomenys[i].egz;
+    duomenys[i].galutinis2 = 0.4 * duomenys[i].med + 0.6 * (double) duomenys[i].egz;
+
+    cout << "galutinis" << duomenys[i].galutinis1<< endl;
+
+        if (duomenys[i].galutinis1>5)
+        {
+            outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+        }
+        if (duomenys[i].galutinis1<=5)
+        {
+            outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
         }
 
-        outfilee << std::endl;
-    }
-
-    outfilee.close();
-
-    std::ofstream outfileee ("test2.txt");
-
-    nr*=10;
-
-    for (int i=0; i<nr; i++)
-    {
-        outfileee << "Vardas" << i << " " << "Pavarde" << i << " ";
-
-        for (int j = 0; j <5; j++) {
-
-            laik = rand() % 10 + 1;
-            outfileee << laik << " ";
-        }
-
-        outfileee << std::endl;
-    }
-
-    outfileee.close();
-
-    std::ofstream outfileeee ("test3.txt");
-
-    nr*=10;
-
-    for (int i=0; i<nr; i++)
-    {
-        outfileeee << "Vardas" << i << " " << "Pavarde" << i << " ";
-
-        for (int j = 0; j <5; j++) {
-
-            laik = rand() % 10 + 1;
-            outfileeee << laik << " ";
-        }
-
-        outfileeee << std::endl;
-    }
-
-    outfileeee.close();
-
-    std::ofstream outfil ("test4.txt");
-
-    nr*=10;
-
-    for (int i=0; i<nr; i++)
-    {
-        outfil << "Vardas" << i << " " << "Pavarde" << i << " ";
-
-        for (int j = 0; j <5; j++) {
-
-            laik = rand() % 10 + 1;
-            outfil << laik << " ";
-        }
-
-        outfil << std::endl;
-    }
-
+    outfile.close();
     outfil.close();
 }
