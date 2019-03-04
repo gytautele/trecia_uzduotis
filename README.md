@@ -58,4 +58,7 @@ Vardas6 Pavarde6 8.3
 
 * v0.4 tekstiniu_generacija_ir_laiko_skaiciavimas - Sugeneruoti penki šabloniniai sąrašai. Studentai padalinti į dvi kategorijas. Atlikta programos veikimo analizė.
 
+* v0.4.3 v0.1_istaisymas - Ištaisyta pirma versija, kurioje buvo reikalauti padaryti 2 cpp failus: pirmame užduotį atlikti su masyvais, antrame - su vektoriais. Pridėta apsauga nuo tuščio vektoriaus tuo atveju, jei vartotojas neįveda jokių duomenų.
+
+
 
