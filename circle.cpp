@@ -1,5 +1,6 @@
 #include "circle.h"
-//-----------------------------------------
+
+//------------------------------
 int pasirinkimas ()
 {
     int f; //pasirinkimui
@@ -53,33 +54,41 @@ void ivedimas_rezultatu(vector<mok> &duomenys, int i) {
 
 }
 //--------------------------------
-double mediana(vector<mok> &duomenys, int i) {
+double mediana(vector<mok> duomenys, int i, double &med) {
+
+    typedef vector<double>::size_type dydis;
+    dydis size=duomenys[i].nd.size();
+    if (size==0)
+    {
+        throw std::domain_error ("negalima skaiciuoti medianos tusciam vektoriui");
+    }
 
     std:: sort(duomenys[i].nd.begin(), duomenys[i].nd.end(), std::greater<int>());
 
     if (duomenys[i].paz_sk% 2 != 0)
     {
-        duomenys[i].med=(double)duomenys[i].nd[duomenys[i].paz_sk/2];
-        return duomenys[i].med;
+        med=(double)duomenys[i].nd[duomenys[i].paz_sk/2];
+        return med;
     }
     else
     {
-        duomenys[i].med=(double)(duomenys[i].nd[(duomenys[i].paz_sk-1)/2] + duomenys[i].nd[duomenys[i].paz_sk/2])/2.0;
-        return duomenys[i].med;
+        med=(double)(duomenys[i].nd[(duomenys[i].paz_sk-1)/2] + duomenys[i].nd[duomenys[i].paz_sk/2])/2.0;
+        return med;
     }
 
 }
 //------------------------------------
 void vidurkis(vector<mok> &duomenys, int i) {
 
-    duomenys[i].vid=(double)duomenys[i].sum/(double)duomenys[i].paz_sk;
+    if (duomenys[i].nd.size()==0)
+    {
+        throw std::domain_error ("negalima skaiciuoti vidurkio tusciam vektoriui");
+    }
+
+    duomenys[i].vid=std::accumulate(duomenys[i].nd.begin(), duomenys[i].nd.begin(), 0.0)/duomenys[i].nd.size();
 
 }
-//-----------------------------------
-bool skaicius(const std::string &str) {
-    return std::all_of(str.begin(), str.end(), ::isdigit);
-}
-//---------------------------------------
+//------------------------------------
 void generacija(vector<mok> &duomenys, int i) {
     int kiek;
     int laik;
@@ -119,156 +128,69 @@ void spausdinimas(vector<mok> &duomenys, int i) {
 }
 //-------------------------
 void skaitymas (vector<mok> &duomenys, int &nr) {
-    int y = 0;
+
     string temp;
     string eil, vard, pav;
     std::ifstream in_file("kursiokai.txt");
 
-    /*if (in_file.fail())
-        std::cout << "write failed" << std::endl;*/
-
     int sk = 0;
-    int h=0;
+    int h = 0;
 
-    while (std::getline(in_file, eil)) {
-        duomenys.push_back(mok());
-        std::istringstream in_line(eil);
-        in_line >> vard >> pav;
-        duomenys[nr].vardas = vard;
-        duomenys[nr].pavarde = pav;
-        nr++;
-
-        while (in_line >> temp) {
-            int ivedu = std::stoi(temp); //pavercia string i integer
-            if (ivedu >= 0 && ivedu <= 10) {
-                duomenys[sk].nd.push_back(ivedu);
-                duomenys[sk].sum+=ivedu;
-                duomenys[sk].paz_sk++;
-            }
-
+    try {
+        if (!in_file.good()) {
+            throw "Failas neegzistuoja";
         }
-        sk++;
-
-        in_line.end;
-
-        int egz = 0;
-        int y=0;
-
-        egz = duomenys[h].nd[duomenys[h].paz_sk-1];
-        duomenys[h].egz=egz;
-
-
-
-        h++;
-        duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
-        duomenys[sk-1].sum=duomenys[sk-1].sum-duomenys[h-1].egz;
-        duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
+    } catch (const char *msg) {
+        cout << msg << endl;
     }
 
+    while (std::getline(in_file, eil)) {
+
+            duomenys.push_back(mok());
+            std::istringstream in_line(eil);
+            in_line >> vard >> pav;
+            duomenys[nr].vardas = vard;
+            duomenys[nr].pavarde = pav;
+            nr++;
+
+            while (in_line >> temp) {
+                int ivedu = std::stoi(temp); //pavercia string i integer
+                if (ivedu >= 0 && ivedu <= 10) {
+                    duomenys[sk].nd.push_back(ivedu);
+                    duomenys[sk].sum += ivedu;
+                    duomenys[sk].paz_sk++;
+                }
+
+            }
+            sk++;
+
+            in_line.end;
+
+            int egz = 0;
+
+            egz = duomenys[h].nd[duomenys[h].paz_sk - 1];
+            duomenys[h].egz = egz;
+
+
+            h++;
+            duomenys[sk - 1].nd[duomenys[sk - 1].paz_sk - 1] = 0;
+            duomenys[sk - 1].sum = duomenys[sk - 1].sum - duomenys[h - 1].egz;
+            duomenys[sk - 1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
+
+        }
+
+    in_file.close();
 
 }
 //-------------------------
 void rikiavimas (vector<mok> &duomenys, int &nr)
-{
-    for (int i=0; i<nr-1; i++)
-        for (int j=i+1; j<nr; j++)
-            if (duomenys[i].vardas<duomenys[j].vardas) {
+    {
+        for (int i=0; i<nr-1; i++)
+            for (int j=i+1; j<nr; j++)
+                if (duomenys[i].vardas<duomenys[j].vardas) {
 
-                std::swap (duomenys[i], duomenys[j]);
+                    std::swap (duomenys[i], duomenys[j]);
 
-            }
-}
+                }
+    }
 //-----------------------
-void generuoti_txt(int i, int &nr)
-{
-    string file_name[5]={"test.txt", "test1.txt", "test2.txt", "test3.txt", "test4.txt"};
-
-    srand (time(NULL));
-    int laik;
-
-    std::ofstream outfile (file_name[i]);
-
-    for (int i=0; i<nr; i++)
-    {
-        outfile << "Vardas" << i << " " << "Pavarde" << i << " ";
-
-        for (int j = 0; j <5; j++) {
-
-            laik = rand() % 10 + 1;
-            outfile << laik << " ";
-        }
-
-        outfile << std::endl;
-    }
-
-    outfile.close();
-}
-//--------------------------------------------------
-void skaitymas_gen (vector<mok> &duomenys, int &i) {
-
-    int y = 0;
-    string temp;
-    string eil, vard, pav;
-    string file_name[5]={"test.txt", "test1.txt", "test2.txt", "test3.txt", "test4.txt"};
-    std::ifstream in_file(file_name[i]);
-
-    int sk = 0;
-    int h=0;
-    int j=0; //vardu skaicius
-
-    while (std::getline(in_file, eil)) {
-        duomenys.push_back(mok());
-        std::istringstream in_line(eil);
-        in_line >> vard >> pav;
-        duomenys[j].vardas = vard;
-        duomenys[j].pavarde = pav;
-        j++;
-
-        while (in_line >> temp) {
-            int ivedu = std::stoi(temp); //pavercia string i integer
-            if (ivedu >= 0 && ivedu <= 10) {
-                duomenys[sk].nd.push_back(ivedu);
-                duomenys[sk].sum+=ivedu;
-                duomenys[sk].paz_sk++;
-            }
-        }
-
-        sk++;
-
-
-        in_line.end;
-
-        int egz = 0;
-        int y=0;
-
-        egz = duomenys[h].nd[duomenys[h].paz_sk-1];
-        duomenys[h].egz=egz;
-
-        h++;
-        duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
-        duomenys[sk-1].sum=duomenys[sk-1].sum-duomenys[h-1].egz;
-        duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
-    }
-}
-//-------------------------
-void rezultatu_skaidymas(vector<mok> &duomenys, int &i)
-{
-    string file_name[2]={"kietiakai.txt", "silpnuoliai.txt"};
-
-    std::ofstream outfile (file_name[0], std::ios::app);
-    std::ofstream outfil (file_name[1], std::ios::app);
-
-    duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 *(double) duomenys[i].egz;
-
-    if (duomenys[i].galutinis1>=5)
-    {
-        outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
-    }
-    if (duomenys[i].galutinis1<5)
-    {
-        outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
-    }
-
-    outfile.close();
-    outfil.close();
-}
