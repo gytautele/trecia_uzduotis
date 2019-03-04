@@ -6,12 +6,12 @@ Programa nuskaito mokinio duomenis, paskaičiuoja galutinį studento pažymį na
 ```shell
 Pavardė     Vardas   Galutinis (Vid.)    Galutinis (Med.)
 -----------------------------------------------------------
-Arvydas     Sabonis      x.xx               x.xx
-Rimas       Kurtinaitis  y.yy               y.yy
+Arvydas     Sabonis         x.xx               x.xx
+Rimas       Kurtinaitis     y.yy               y.yy
 ```
 ## Programos naudojimas
 
-Programą galima naudoti įvedant rezultatus pačiam arba nuskaitant rezultatus iš tekstinio failo.
+Programą galima naudoti įvedant rezultatus pačiam arba nuskaitant rezultatus iš susidaryto tekstinio failo.
 
 Tekstinio failo pavyzdys:
 ```shell
@@ -20,6 +20,24 @@ Vardas1     Pavardė1    8    9     10   6    10   9
 Vardas2     Pavardė2    7    10    8    5    4    6
 ...
 ```
+Taip pat yra galimybė atsitiktinai sugeneruoti 5 tekstinius šabloninius failus, apskaičiuoti kiekvieno mokinio galutinį balą pagal vidurkį ir rezultatus įrašyti į du tekstinius failus: kietiakai.txt ir silpnuoliai.txt:
+
+Šabloninio tekstinio failo pavyzdys:
+```shell
+Vardas0 Pavarde0 8 8 4 7 7 
+Vardas1 Pavarde1 4 6 7 5 1 
+Vardas2 Pavarde2 8 1 8 5 3
+...
+```
+Kietiakai.txt failo pavyzdys:
+```shell
+Vardas0 Pavarde0 8.9
+Vardas3 Pavarde3 7.2
+Vardas4 Pavarde4 7.3
+Vardas6 Pavarde6 8.3
+...
+```
+
 ## Versijų istorija
 
 * v0.1.1 pirmi_du_punktai - Vidurkio ir medianos skaičiavimas
