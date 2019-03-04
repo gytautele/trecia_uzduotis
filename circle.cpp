@@ -1,6 +1,5 @@
 #include "circle.h"
-
-//------------------------------
+//-----------------------------------------
 int pasirinkimas ()
 {
     int f; //pasirinkimui
@@ -132,15 +131,6 @@ void skaitymas (vector<mok> &duomenys, int &nr) {
     int h=0;
 
     while (std::getline(in_file, eil)) {
-        while (!in_file.eof()){
-            try {
-                if (!in_file.good()){
-                    throw "Failas neegzistuoja";
-                }
-            } catch (const char* msg){
-                cout << msg << endl;
-                break;
-            }
         duomenys.push_back(mok());
         std::istringstream in_line(eil);
         in_line >> vard >> pav;
@@ -189,3 +179,96 @@ void rikiavimas (vector<mok> &duomenys, int &nr)
             }
 }
 //-----------------------
+void generuoti_txt(int i, int &nr)
+{
+    string file_name[5]={"test.txt", "test1.txt", "test2.txt", "test3.txt", "test4.txt"};
+
+    srand (time(NULL));
+    int laik;
+
+    std::ofstream outfile (file_name[i]);
+
+    for (int i=0; i<nr; i++)
+    {
+        outfile << "Vardas" << i << " " << "Pavarde" << i << " ";
+
+        for (int j = 0; j <5; j++) {
+
+            laik = rand() % 10 + 1;
+            outfile << laik << " ";
+        }
+
+        outfile << std::endl;
+    }
+
+    outfile.close();
+}
+//--------------------------------------------------
+void skaitymas_gen (vector<mok> &duomenys, int &i) {
+
+    int y = 0;
+    string temp;
+    string eil, vard, pav;
+    string file_name[5]={"test.txt", "test1.txt", "test2.txt", "test3.txt", "test4.txt"};
+    std::ifstream in_file(file_name[i]);
+
+    int sk = 0;
+    int h=0;
+    int j=0; //vardu skaicius
+
+    while (std::getline(in_file, eil)) {
+        duomenys.push_back(mok());
+        std::istringstream in_line(eil);
+        in_line >> vard >> pav;
+        duomenys[j].vardas = vard;
+        duomenys[j].pavarde = pav;
+        j++;
+
+        while (in_line >> temp) {
+            int ivedu = std::stoi(temp); //pavercia string i integer
+            if (ivedu >= 0 && ivedu <= 10) {
+                duomenys[sk].nd.push_back(ivedu);
+                duomenys[sk].sum+=ivedu;
+                duomenys[sk].paz_sk++;
+            }
+        }
+
+        sk++;
+
+
+        in_line.end;
+
+        int egz = 0;
+        int y=0;
+
+        egz = duomenys[h].nd[duomenys[h].paz_sk-1];
+        duomenys[h].egz=egz;
+
+        h++;
+        duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
+        duomenys[sk-1].sum=duomenys[sk-1].sum-duomenys[h-1].egz;
+        duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
+    }
+}
+//-------------------------
+void rezultatu_skaidymas(vector<mok> &duomenys, int &i)
+{
+    string file_name[2]={"kietiakai.txt", "silpnuoliai.txt"};
+
+    std::ofstream outfile (file_name[0], std::ios::app);
+    std::ofstream outfil (file_name[1], std::ios::app);
+
+    duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 *(double) duomenys[i].egz;
+
+    if (duomenys[i].galutinis1>=5)
+    {
+        outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+    }
+    if (duomenys[i].galutinis1<5)
+    {
+        outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+    }
+
+    outfile.close();
+    outfil.close();
+}
