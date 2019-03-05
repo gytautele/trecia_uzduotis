@@ -2,6 +2,8 @@
 
 ## Programos tikslas
 
+### v0.1-v0.3
+
 Programa nuskaito mokinio duomenis, paskaičiuoja galutinį studento pažymį naudojant vidurkį ir medianą.
 ```shell
 Pavardė     Vardas   Galutinis (Vid.)    Galutinis (Med.)
@@ -9,9 +11,13 @@ Pavardė     Vardas   Galutinis (Vid.)    Galutinis (Med.)
 Arvydas     Sabonis         x.xx               x.xx
 Rimas       Kurtinaitis     y.yy               y.yy
 ```
+### v0.4 ir toliau
+
+Programos tikslas yra ir patikrinti kaip sparčiai programa gali atlikti užduotį ir kaip jos vykdymo greitis priklauso nuo pradinių duomenų failo dydžio ir kiekio.
+
 ## Programos naudojimas
 
-Programą galima naudoti įvedant rezultatus pačiam arba nuskaitant rezultatus iš susidaryto tekstinio failo.
+Programą galima naudoti įvedant rezultatus pačiam arba nuskaitant rezultatus iš sudaryto/asmeniškai susidaryto tekstinio failo.
 
 Tekstinio failo pavyzdys:
 ```shell
@@ -20,7 +26,7 @@ Vardas1     Pavardė1    8    9     10   6    10   9
 Vardas2     Pavardė2    7    10    8    5    4    6
 ...
 ```
-Taip pat yra galimybė atsitiktinai sugeneruoti 5 tekstinius šabloninius failus, apskaičiuoti kiekvieno mokinio galutinį balą pagal vidurkį ir rezultatus įrašyti į du tekstinius failus: kietiakai.txt ir silpnuoliai.txt:
+Taip pat yra galimybė atsitiktinai sugeneruoti 5 tekstinius šabloninius failus, apskaičiuoti kiekvieno mokinio galutinį balą pagal vidurkį (arba medianą pasirinktinai) ir rezultatus įrašyti į du tekstinius failus: kietiakai.txt ir silpnuoliai.txt:
 
 Šabloninio tekstinio failo pavyzdys:
 ```shell
@@ -37,6 +43,9 @@ Vardas4 Pavarde4 7.3
 Vardas6 Pavarde6 8.3
 ...
 ```
+## Programos paleidimas
+
+Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt.
 
 ## Versijų istorija
 
@@ -59,6 +68,3 @@ Vardas6 Pavarde6 8.3
 * v0.4 tekstiniu_generacija_ir_laiko_skaiciavimas - Sugeneruoti penki šabloniniai sąrašai. Studentai padalinti į dvi kategorijas. Atlikta programos veikimo analizė.
 
 * v0.4.3 v0.1_istaisymas - Ištaisyta pirma versija, kurioje buvo reikalauti padaryti 2 cpp failus: pirmame užduotį atlikti su masyvais, antrame - su vektoriais. Pridėta apsauga nuo tuščio vektoriaus tuo atveju, jei vartotojas neįveda jokių duomenų.
-
-
-
