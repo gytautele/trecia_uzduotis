@@ -78,7 +78,7 @@ double mediana(vector<mok> duomenys, int i, double &med) {
 //------------------------------------
 void vidurkis(vector<mok> &duomenys, int i) {
 
-    if (duomenys[i].nd.size()==0)
+    while (duomenys[i].nd.empty())
     {
         throw std::domain_error ("negalima skaiciuoti vidurkio tusciam vektoriui");
     }
@@ -164,7 +164,7 @@ void skaitymas (vector<mok> &duomenys, int &nr) {
 
     while (std::getline(in_file, eil)) {
 
-        duomenys.push_back(mok());
+        duomenys.emplace_back(mok());
         std::istringstream in_line(eil);
         in_line >> vard >> pav;
         duomenys[nr].vardas = vard;
@@ -255,7 +255,7 @@ void skaitymas_gen (vector<mok> &duomenys, int &i) {
     int j=0; //vardu skaicius
 
     while (std::getline(in_file, eil)) {
-        duomenys.push_back(mok());
+        duomenys.emplace_back(mok());
         std::istringstream in_line(eil);
         in_line >> vard >> pav;
         duomenys[j].vardas.reserve(1000);
@@ -271,9 +271,7 @@ void skaitymas_gen (vector<mok> &duomenys, int &i) {
                 duomenys[sk].paz_sk++;
             }
         }
-
         sk++;
-
 
         in_line.end;
 
@@ -284,25 +282,32 @@ void skaitymas_gen (vector<mok> &duomenys, int &i) {
 
         h++;
         duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
-        duomenys[sk-1].sum=duomenys[sk-1].sum-duomenys[h-1].egz;
         duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
     }
 }
 //-------------------------
-void rezultatu_skaidymas(vector<mok> &duomenys, int &i) {
+void rezultatu_skaidymas(vector<mok> duomenys) {
 
     string file_name[2] = {"kietiakai.txt", "silpnuoliai.txt"};
 
     std::ofstream outfile(file_name[0], std::ios::app);
     std::ofstream outfil(file_name[1], std::ios::app);
 
-    duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
+    int nrr=1;
 
-    if (duomenys[i].galutinis1 >= 5) {
-        outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
-    }
-    if (duomenys[i].galutinis1 < 5) {
-        outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+    for (int i=0; i<nrr; i++)
+    {
+        nrr*=10;
+
+        vidurkis(duomenys, i);
+        duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
+
+        if (duomenys[i].galutinis1 >= 5) {
+            outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+        }
+        if (duomenys[i].galutinis1 < 5) {
+            outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+        }
     }
 
     outfile.close();

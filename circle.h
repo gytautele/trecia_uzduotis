@@ -30,7 +30,6 @@ struct mok
     string vardas;
     string pavarde;
     vector <int> nd;
-    vector <int> nd_gen; //saugomi sugeneruoti skaiciai , kai dirbama su tekstiniais failais
     double galutinis1=0; //rezultatas su vidurkiu
     double galutinis2=0; //rezultatas su mediana
     int egz=0;
@@ -54,5 +53,5 @@ void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav);
 void rikiavimas (vector<mok> &duomenys, int &nr);
 void generuoti_txt(int i, int &nr);
 void skaitymas_gen (vector<mok> &duomenys, int &i);
-void rezultatu_skaidymas(vector<mok> &duomenys, int &i);
+void rezultatu_skaidymas(vector<mok> duomenys);
 

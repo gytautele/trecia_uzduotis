@@ -15,7 +15,6 @@ int main () {
     std::remove("kietiakai.txt");
 
     int nr=1;
-    int laikinas=0;
 
     if (jj==5) {
 
@@ -25,22 +24,21 @@ int main () {
             generuoti_txt(i, nr);
             skaitymas_gen (duomenys, i);
             auto pabaiga = std::chrono::system_clock::now();
-            auto uztruko = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga - startas).count();
-            laikinas=i;
-            cout << laikinas+1 << "-ojo failo generavimas ir skaitymas uztruko: " << uztruko << " sekundziu" << endl;
+            auto uztruko = std::chrono::duration_cast< std::chrono::duration<double> > (pabaiga - startas).count();
+            cout << i+1 << "-ojo failo generavimas ir skaitymas uztruko: " << uztruko << " sekundziu" << endl;
 
-            for (int j=0; j<nr; j++)
-            {
-                vidurkis(duomenys, i);
-                rezultatu_skaidymas (duomenys, j);
-            }
         }
+        auto startas1 = std::chrono::system_clock::now();
+
+        rezultatu_skaidymas (duomenys);
+
         auto pabaiga2 = std::chrono::system_clock::now();
-        auto uztruko1 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga2 - startas).count();
-        cout << "Galutinio rezultato gavimas uztruko " << uztruko1 << " sekundziu" << endl;
-
+        auto uztruko1 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga2 - startas1).count();
+        cout << "Rezultatu skaidymas i du tekstinius failus uztruko: " << uztruko1 << " sekundziu" << endl;
+        auto pabaiga3 = std::chrono::system_clock::now();
+        auto uztruko3 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga3 - startas).count();
+        cout << "Visos programos veikimas: " << uztruko3 << " sekundziu" << endl;
     }
-
 
     if (jj==5) return 0;
 
