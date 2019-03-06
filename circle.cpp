@@ -295,18 +295,21 @@ void rezultatu_skaidymas(vector<mok> duomenys) {
 
     int nrr=1;
 
-    for (int i=0; i<nrr; i++)
+    for (int j=0; j<5; j++)
     {
         nrr*=10;
+        for (int i=0; i<nrr; i++)
+        {
+            vidurkis(duomenys, i);
+            duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
 
-        vidurkis(duomenys, i);
-        duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
+            if (duomenys[i].galutinis1 >= 5) {
+                outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+            }
 
-        if (duomenys[i].galutinis1 >= 5) {
-            outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
-        }
-        if (duomenys[i].galutinis1 < 5) {
-            outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+            if (duomenys[i].galutinis1 < 5) {
+                outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+            }
         }
     }
 
