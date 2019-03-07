@@ -3,6 +3,9 @@
 int main () {
 
     vector<mok> duomenys;
+    vector<mok> silpni;
+    vector<mok> kieti;
+
     double med=0;
 
     int jj;
@@ -33,7 +36,8 @@ int main () {
         }
         auto startas1 = std::chrono::system_clock::now();
 
-        rezultatu_skaidymas (duomenys);
+        rezultatu_skaidymas (duomenys, silpni, kieti);
+        spausdinu(silpni, kieti);
 
         auto pabaiga2 = std::chrono::system_clock::now();
         auto uztruko1 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga2 - startas1).count();

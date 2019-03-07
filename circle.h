@@ -1,8 +1,6 @@
 #ifndef PENKTA_SU_HEADERIAIS_CIRCLE_H
 #define PENKTA_SU_HEADERIAIS_CIRCLE_H
 
-#endif //PENKTA_SU_HEADERIAIS_CIRCLE_H
-
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -54,4 +52,7 @@ void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav);
 void rikiavimas (vector<mok> &duomenys, int &nr);
 void generuoti_txt(int i, int &nr);
 void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j);
-void rezultatu_skaidymas(vector<mok> duomenys);
+void rezultatu_skaidymas(vector<mok> &duomenys, vector<mok> &silpni, vector<mok> &kieti);
+void spausdinu ( vector<mok> silpni, vector<mok> kieti);
+
+#endif //PENKTA_SU_HEADERIAIS_CIRCLE_H

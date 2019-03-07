@@ -238,7 +238,7 @@ void generuoti_txt(int i, int &nr)
         for (int j = 0; j <5; j++) {
 
             laik = dist(mt);
-            outfile << laik << " ";
+            outfile << laik << " " ;
         }
 
         outfile << std::endl;
@@ -269,7 +269,6 @@ void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j) {
         duomenys[j].vardas = vard;
         duomenys[j].pavarde = pav;
         j++;
-
         while (in_line >> temp) {
             int ivedu = std::stoi(temp); //pavercia string i integer
             if (ivedu >= 0 && ivedu <= 10) {
@@ -284,6 +283,7 @@ void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j) {
 
         int egz = 0;
 
+
         egz = duomenys[h].nd[duomenys[h].paz_sk-1];
         duomenys[h].egz=egz;
 
@@ -291,43 +291,54 @@ void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j) {
         duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
         duomenys[sk-1].sum-=duomenys[h-1].egz;
         duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzamina
-
-       // cout << sk << " " << h << " " << j << endl;
-        //cout << "egzas" << duomenys[sk-1].egz << endl;
-        //cout << "paz_sk" << duomenys[sk-1].paz_sk << endl;
-
     }
 }
 //-------------------------
-void rezultatu_skaidymas(vector<mok> duomenys) {
+void rezultatu_skaidymas(vector<mok> &duomenys, vector<mok> &silpni, vector<mok> &kieti) {
 
+    for (int j=0; j<5; j++)
+    {
+        for (int i=0; i<duomenys.size(); i++)
+        {
+            vidurkis(duomenys, i);
+            duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
+
+            if (duomenys[i].galutinis1>=5) {
+               kieti.push_back(duomenys[i]);
+            }
+
+            if (duomenys[i].galutinis1<5) {
+                silpni.push_back(duomenys[i]);
+            }
+        }
+
+    }
+
+    duomenys.clear();
+}
+//------------------------
+void spausdinu ( vector<mok> silpni, vector<mok> kieti)
+{
     string file_name[2] = {"kietiakai.txt", "silpnuoliai.txt"};
 
     std::ofstream outfile(file_name[0], std::ios::app);
     std::ofstream outfil(file_name[1], std::ios::app);
 
-    int nrr=1;
-
-    for (int j=0; j<5; j++)
+    for (int i=0; i<kieti.size(); i++)
     {
-        nrr*=10;
-        for (int i=0; i<nrr; i++)
-        {
-            vidurkis(duomenys, i);
-            duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
-
-            if (duomenys[i].galutinis1 >= 5) {
-                outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << std::fixed << std::setprecision(2) <<duomenys[i].galutinis1 << endl;
-            }
-
-            if (duomenys[i].galutinis1 < 5) {
-                outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << std::fixed << std::setprecision(2) << duomenys[i].galutinis1 << endl;
-            }
-        }
+        outfile << kieti[i].pavarde << " " << kieti[i].vardas << " " << std::fixed << std::setprecision(2) << kieti[i].galutinis1 << endl;
     }
+
+    kieti.clear();
+
+    for (int i=0; i<silpni.size(); i++)
+    {
+        outfil << silpni[i].pavarde << " " << silpni[i].vardas << " " << std::fixed << std::setprecision(2) << silpni[i].galutinis1 << endl;
+    }
+
+    silpni.clear();
 
     outfile.close();
     outfil.close();
 
 }
-//------------------------
