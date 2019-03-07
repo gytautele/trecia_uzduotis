@@ -15,6 +15,9 @@ int main () {
     std::remove("kietiakai.txt");
 
     int nr=1;
+    int sk = 0;
+    int h=0;
+    int j=0;
 
     if (jj==5) {
 
@@ -22,7 +25,7 @@ int main () {
         {
             nr=nr*10;
             generuoti_txt(i, nr);
-            skaitymas_gen (duomenys, i);
+            skaitymas_gen (duomenys, i, sk, h, j);
             auto pabaiga = std::chrono::system_clock::now();
             auto uztruko = std::chrono::duration_cast< std::chrono::duration<double> > (pabaiga - startas).count();
             cout << i+1 << "-ojo failo generavimas ir skaitymas uztruko: " << uztruko << " sekundziu" << endl;

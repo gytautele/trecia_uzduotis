@@ -83,11 +83,12 @@ void vidurkis(vector<mok> &duomenys, int i) {
         throw std::domain_error ("negalima skaiciuoti vidurkio tusciam vektoriui");
     }
 
-    duomenys[i].vid=std::accumulate(duomenys[i].nd.begin(), duomenys[i].nd.begin(), 0.0)/duomenys[i].nd.size();
+    duomenys[i].vid=(double)duomenys[i].sum/(double)duomenys[i].paz_sk;
 
 }
 //--------------------------------------
 void generacija(vector<mok> &duomenys, int i) {
+
     int kiek;
     int laik;
     cout << "Kiek norite generuoti skaiciu?" << endl;
@@ -95,15 +96,17 @@ void generacija(vector<mok> &duomenys, int i) {
 
     srand (time(NULL));
     duomenys[i].paz_sk=kiek;
+    std::mt19937 mt(1729);
+    std::uniform_int_distribution <int> dist (1,10);
 
     for (int j = 0; j <kiek; j++) {
 
-        laik = rand() % 10 + 1;
+        laik = dist(mt);
         duomenys[i].nd.push_back(laik);
         duomenys[i].sum += laik;
     }
 
-    laik = rand() % 10 + 1;
+    laik = dist(mt);
     duomenys[i].egz = laik;
 
 }
@@ -123,7 +126,7 @@ void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav)
     cout<<endl;
 
     for (int g=0; g<did_vard+did_pav+70; g++)
-    cout<<std::left<< "-";
+        cout<<std::left<< "-";
 
     cout<<endl;
 
@@ -136,8 +139,8 @@ void spausdinimas(vector<mok> &duomenys, int i, int did_vard, int did_pav) {
 
     cout<<std::left<<std::setw(did_pav+15)<<duomenys[i].pavarde;
     cout<<std::left<<std::setw(did_vard+15)<<duomenys[i].vardas;
-    cout<<std::left<<std::setw(did_vard+15)<< duomenys[i].galutinis1;
-    cout<<std::left<<std::setw(did_vard+15)<< duomenys[i].galutinis2;
+    cout<<std::left<<std::setw(did_vard+15)<<std::fixed <<std::setprecision(2)<< duomenys[i].galutinis1;
+    cout<<std::left<<std::setw(did_vard+15)<<std::fixed << std::setprecision(2) << duomenys[i].galutinis2;
     cout << endl;
 
     for (int g=0; g<did_vard+did_pav+70; g++)
@@ -164,7 +167,7 @@ void skaitymas (vector<mok> &duomenys, int &nr) {
 
     while (std::getline(in_file, eil)) {
 
-        duomenys.emplace_back(mok());
+        duomenys.push_back(mok());
         std::istringstream in_line(eil);
         in_line >> vard >> pav;
         duomenys[nr].vardas = vard;
@@ -201,7 +204,7 @@ void skaitymas (vector<mok> &duomenys, int &nr) {
 
 }
 //-------------------------
-void rikiavimas (vector<mok> &duomenys, int &nr)
+void rikiavimas (vector<mok> &duomenys, int &nr) //PAKEISTI!!!!!!!!!!!!!
 {
     for (int i=0; i<nr-1; i++)
         for (int j=i+1; j<nr; j++)
@@ -220,6 +223,13 @@ void generuoti_txt(int i, int &nr)
     int laik;
 
     std::ofstream outfile (file_name[i]);
+    std::mt19937 mt(1729);
+    std::uniform_int_distribution <int> dist (1,10);
+
+    //std::randome_device rd;
+    //std::mt19937 mt(rd());
+    //std::uniform_int_distribution <int> range (0,99);
+    //cout << range(mt) << " ";
 
     for (int g=0; g<nr; g++)
     {
@@ -227,7 +237,7 @@ void generuoti_txt(int i, int &nr)
 
         for (int j = 0; j <5; j++) {
 
-            laik = rand() % 10 + 1;
+            laik = dist(mt);
             outfile << laik << " ";
         }
 
@@ -237,7 +247,7 @@ void generuoti_txt(int i, int &nr)
     outfile.close();
 }
 //--------------------------------------------------
-void skaitymas_gen (vector<mok> &duomenys, int &i) {
+void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j) {
 
     string temp;
     string eil, vard, pav;
@@ -250,12 +260,8 @@ void skaitymas_gen (vector<mok> &duomenys, int &i) {
         in_file.clear();
     }
 
-    int sk = 0;
-    int h=0;
-    int j=0; //vardu skaicius
-
     while (std::getline(in_file, eil)) {
-        duomenys.emplace_back(mok());
+        duomenys.push_back(mok());
         std::istringstream in_line(eil);
         in_line >> vard >> pav;
         duomenys[j].vardas.reserve(1000);
@@ -268,6 +274,7 @@ void skaitymas_gen (vector<mok> &duomenys, int &i) {
             int ivedu = std::stoi(temp); //pavercia string i integer
             if (ivedu >= 0 && ivedu <= 10) {
                 duomenys[sk].nd.push_back(ivedu);
+                duomenys[sk].sum+=ivedu;
                 duomenys[sk].paz_sk++;
             }
         }
@@ -282,7 +289,13 @@ void skaitymas_gen (vector<mok> &duomenys, int &i) {
 
         h++;
         duomenys[sk-1].nd[duomenys[sk-1].paz_sk-1]=0;
-        duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzaminas
+        duomenys[sk-1].sum-=duomenys[h-1].egz;
+        duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzamina
+
+       // cout << sk << " " << h << " " << j << endl;
+        //cout << "egzas" << duomenys[sk-1].egz << endl;
+        //cout << "paz_sk" << duomenys[sk-1].paz_sk << endl;
+
     }
 }
 //-------------------------
@@ -304,11 +317,11 @@ void rezultatu_skaidymas(vector<mok> duomenys) {
             duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
 
             if (duomenys[i].galutinis1 >= 5) {
-                outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+                outfile << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << std::fixed << std::setprecision(2) <<duomenys[i].galutinis1 << endl;
             }
 
             if (duomenys[i].galutinis1 < 5) {
-                outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << duomenys[i].galutinis1 << endl;
+                outfil << duomenys[i].vardas << " " << duomenys[i].pavarde << " " << std::fixed << std::setprecision(2) << duomenys[i].galutinis1 << endl;
             }
         }
     }
@@ -317,3 +330,4 @@ void rezultatu_skaidymas(vector<mok> duomenys) {
     outfil.close();
 
 }
+//------------------------

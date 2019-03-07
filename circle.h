@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <chrono>
 #include <numeric> //std::accumulate
+#include <random>
 
 using std::cout;
 using std::string;
@@ -52,6 +53,5 @@ void skaitymas (vector<mok> &duomenys, int &nr);
 void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav);
 void rikiavimas (vector<mok> &duomenys, int &nr);
 void generuoti_txt(int i, int &nr);
-void skaitymas_gen (vector<mok> &duomenys, int &i);
+void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j);
 void rezultatu_skaidymas(vector<mok> duomenys);
-
