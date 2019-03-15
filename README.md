@@ -75,12 +75,47 @@ Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt.
 * v0.4.6 spartesne_v0.4 - Sutrumpintas programos veikimo laikas. Pridėta išsamenė analizė:
 
 #### Programos veikimo laikas:
+
+* kai užduotis atlikta su vektoriais (kai dirbama su txt failais iškart):
 ```shell
-1-ojo failo generavimas ir skaitymas uztruko: 0.013295 sekundziu
-2-ojo failo generavimas ir skaitymas uztruko: 0.0307256 sekundziu
-3-ojo failo generavimas ir skaitymas uztruko: 0.150251 sekundziu
-4-ojo failo generavimas ir skaitymas uztruko: 1.33017 sekundziu
-5-ojo failo generavimas ir skaitymas uztruko: 12.1396 sekundziu
-Rezultatu skaidymas i du tekstinius failus uztruko: 0.54403 sekundziu
-Visos programos veikimas: 12.6853 sekundziu
+1-ojo failo skaitymas uztruko: 0.0092488 sekundziu
+2-ojo failo skaitymas uztruko: 0.0222416 sekundziu
+3-ojo failo skaitymas uztruko: 0.0885235 sekundziu
+4-ojo failo skaitymas uztruko: 0.594704 sekundziu
+5-ojo failo skaitymas uztruko: 5.72 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 4.88297 sekundziu
+Visos programos veikimas: 10.6052 sekundziu
 ```
+* kai užduotis atlikta su vektoriais (kai dirbama su vektoriais, vėliau juos išvedant į txt failus):
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0081432 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0226051 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.135645 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 1.3408 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 11.9233 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 32.6658 sekundziu
+Visos programos veikimas: 44.5918 sekundziu
+```
+* kai užduotis atlikta su deque:
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0079596 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0238214 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.147717 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 1.43002 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 13.1182 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 32.3071 sekundziu
+Visos programos veikimas: 45.4265 sekundziu
+```
+* kai užduotis atlikta su list'ais:
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0089147 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0374781 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.17075 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 1.30393 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 10.1137 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 5.48772 sekundziu
+Visos programos veikimas: 15.6039 sekundziu
+```
+### Spartos analizės komentaras
+
+Lyginant programos darbą, kai dirbama su vektoriais, ji sparčiau veikia, kai iškart dirbama su txt failais, o ne saugant duomenis į vektorius ir tada juos išvedinėjant į txt failus. Naudojant vektorius ir deque programos sparta beveik nesiskiria. Lyginant std::<vector> ir std::<deque> konteinerius su list'ais skirtumas yra labai žymus - programa veikia pastebimai efektyviau.
