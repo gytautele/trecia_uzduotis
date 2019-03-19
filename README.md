@@ -119,3 +119,41 @@ Visos programos veikimas: 15.6039 sekundziu
 ### Spartos analizės komentaras
 
 Lyginant programos darbą, kai dirbama su vektoriais, ji sparčiau veikia, kai iškart dirbama su txt failais, o ne saugant duomenis į vektorius ir tada juos išvedinėjant į txt failus. Naudojant vektorius ir deque programos sparta beveik nesiskiria. Lyginant std::<vector> ir std::<deque> konteinerius su list'ais skirtumas yra labai žymus - programa veikia pastebimai efektyviau.
+  
+  ### v1.0:
+  
+1 strategija:
+* Užduoties spartos analize pateikta ankstesnėje versijoje (kadangi ji sutampa su mano atlikta)
+* Normalu, kad sunaudojama daugiau atminties, kadangi tas pats studentas yra abejuose konteineriuose.
+
+2 strategija:
+* Atminties požiuriu ši strategija daug efektyvesnė.
+* Laiko atžvilgiu užtrunka daug ilgiau:
+
+su std::vector:
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0051894 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0206429 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.141827 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 1.33938 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 12.8433 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 452.1433 sekundziu
+```
+su std::deque:
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0078154 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0106421 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.182842 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 2.31939 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 11.8038 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 489.1253 sekundziu
+```
+su std::list:
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0071584 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0106181 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.192812 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 1.32938 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 9.8038 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 44.1266 sekundziu
+```
