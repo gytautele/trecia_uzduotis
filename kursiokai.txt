@@ -1,3 +1,0 @@
-Vardas Pavarde 4 5 6 8 9
-Oskaras Diraitis 5 6 9 4 7
-Gytaute Barzdziute 0 0 0 0 0
