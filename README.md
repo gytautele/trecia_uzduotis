@@ -45,7 +45,7 @@ Vardas6 Pavarde6 8.3
 ```
 ## Programos paleidimas
 
-Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt. Arba makefile:
+Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt. Arba Makefile:
 
 ```shell
 Run:
@@ -53,7 +53,7 @@ Run:
 	./test
   
 Clear:
-  rm *.md test
+	rm *.md test
 ```
 
 ## Versijų istorija
