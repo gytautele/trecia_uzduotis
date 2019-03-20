@@ -150,10 +150,11 @@ Rezultatu skaidymas i du tekstinius failus uztruko: 489.1253 sekundziu
 ```
 su std::list:
 ```shell
-1-ojo failo generavimas ir skaitymas uztruko: 0.0071584 sekundziu
-2-ojo failo generavimas ir skaitymas uztruko: 0.0106181 sekundziu
-3-ojo failo generavimas ir skaitymas uztruko: 0.192812 sekundziu
-4-ojo failo generavimas ir skaitymas uztruko: 1.32938 sekundziu
-5-ojo failo generavimas ir skaitymas uztruko: 9.8038 sekundziu
-Rezultatu skaidymas i du tekstinius failus uztruko: 44.1266 sekundziu
+1-ojo failo generavimas ir skaitymas uztruko: 0.0042882 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0192858 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.0538119 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 0.324236 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 2.27059 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 1.74474 sekundziu
+Visos programos veikimas: 4.01631 sekundziu
 ```
