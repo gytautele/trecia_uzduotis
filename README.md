@@ -45,7 +45,16 @@ Vardas6 Pavarde6 8.3
 ```
 ## Programos paleidimas
 
-Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt.
+Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt. Arba makefile:
+
+```shell
+Run:
+	g++ -o test main.cpp circle.cpp
+	./test
+  
+Clear:
+  rm *.md test
+```
 
 ## Versijų istorija
 
@@ -73,6 +82,8 @@ Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt.
 * v0.4.4 v0.2/v0.3_istaisymas - Pataisyta 3 versija, bet kartu ir 2 , kadangi jos glaudžiai susiję: sutaisyta try catch, kadangi laužė visą programą; įdėta apsauga medianos ir vidurkio skaičiavime; nuimtas medianos referencas, kad nebūtų išsaugomi sortinami rezultatai; vietoj sumos naudojama funkcija std::accumulate
 * v0.4.5 pataisyta_v0.4_versija - Pridėta: tvarkingas stulpelių rikiavimas pagal ilgiausią vardą/pavardę; panaudota rikiavimo funkcija, kuri per nepastabumą buvo apibrėžta, bet nenaudojama; pridėtas tekstinių failų ištrynimas prieš pradedant programą; Yra bėdų su programos veikimo laiku.
 * v0.4.6 spartesne_v0.4 - Sutrumpintas programos veikimo laikas. Pridėta išsamenė analizė:
+
+### v0.5:
 
 #### Programos veikimo laikas:
 
@@ -120,7 +131,7 @@ Visos programos veikimas: 15.6039 sekundziu
 
 Lyginant programos darbą, kai dirbama su vektoriais, ji sparčiau veikia, kai iškart dirbama su txt failais, o ne saugant duomenis į vektorius ir tada juos išvedinėjant į txt failus. Naudojant vektorius ir deque programos sparta beveik nesiskiria. Lyginant std::<vector> ir std::<deque> konteinerius su list'ais skirtumas yra labai žymus - programa veikia pastebimai efektyviau.
   
-  ### v1.0:
+ ### v1.0:
   
 1 strategija:
 * Užduoties spartos analize pateikta ankstesnėje versijoje (kadangi ji sutampa su mano atlikta)
