@@ -134,7 +134,7 @@ Lyginant programos darbą, kai dirbama su vektoriais, ji sparčiau veikia, kai i
  ### v1.0:
   
 1 strategija:
-* Užduoties spartos analize pateikta ankstesnėje versijoje (kadangi ji sutampa su mano atlikta)
+* Užduoties spartos analizė,ž pateikta ankstesnėje versijoje (kadangi ji sutampa su mano atlikta).
 * Normalu, kad sunaudojama daugiau atminties, kadangi tas pats studentas yra abejuose konteineriuose.
 
 2 strategija:
@@ -169,3 +169,19 @@ su std::list:
 Rezultatu skaidymas i du tekstinius failus uztruko: 1.74474 sekundziu
 Visos programos veikimas: 4.01631 sekundziu
 ```
+ ### v1.0 (panaudojant algoritmus, spartinančius programą):
+ 
+ su std::vector:
+```shell
+1-ojo failo generavimas ir skaitymas uztruko: 0.0049746 sekundziu
+2-ojo failo generavimas ir skaitymas uztruko: 0.0099501 sekundziu
+3-ojo failo generavimas ir skaitymas uztruko: 0.0419666 sekundziu
+4-ojo failo generavimas ir skaitymas uztruko: 0.310295 sekundziu
+5-ojo failo generavimas ir skaitymas uztruko: 3.95761 sekundziu
+Rezultatu skaidymas i du tekstinius failus uztruko: 2.86979 sekundziu
+Visos programos veikimas: 6.82846 sekundziu
+```
+### Spartos analizės komentaras
+
+Atliekant programą pagal 2 strategiją su vektoriais, programos darbas tikrai ilgas. Modifikavus tą pačią programą, panaudojus algoritmą stable_partition programos sparta žymiai didesnė. Išvada: algoritmai gali žymiai paspartinti programos veikimą.
+ 
