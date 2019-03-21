@@ -2,13 +2,8 @@
 
 int main () {
 
-    deque<mok> duomenys;
-    deque<mok> silpni;
-    deque<mok> kieti;
-
-    list<mok> duomenyss;
-    list<mok> silpnii;
-    list<mok> kietii;
+    vector<mok> duomenys;
+    vector<mok> silpni;
 
     double med=0;
 
@@ -18,8 +13,8 @@ int main () {
 
     auto startas = std::chrono::system_clock::now();
 
-    std::remove("silpnuoliai.txt");
-    std::remove("kietiakai.txt");
+    std::remove("silpnuoliai.md");
+    std::remove("kietiakai.md");
 
     int nr=1;
     int sk = 0;
@@ -32,7 +27,7 @@ int main () {
         {
             nr=nr*10;
             generuoti_txt(i, nr);
-            skaitymas_gen (duomenyss, i);
+            skaitymas_gen (duomenys, i, sk, h, j);
             auto pabaiga = std::chrono::system_clock::now();
             auto uztruko = std::chrono::duration_cast< std::chrono::duration<double> > (pabaiga - startas).count();
             cout << i+1 << "-ojo failo generavimas ir skaitymas uztruko: " << uztruko << " sekundziu" << endl;
@@ -40,8 +35,12 @@ int main () {
         }
         auto startas1 = std::chrono::system_clock::now();
 
-        rezultatu_skaidymas (duomenyss, silpnii, kietii);
-        spausdinu(silpnii, kietii);
+
+        galutinis(duomenys);
+        silpni=raskminkstus(duomenys);
+        //rezultatu_skaidymas (duomenys, silpni);
+
+        spausdinu(silpni, duomenys);
 
         auto pabaiga2 = std::chrono::system_clock::now();
         auto uztruko1 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga2 - startas1).count();
@@ -96,9 +95,9 @@ int main () {
                 mediana(duomenys, i, med);
                 duomenys[i].med=med;
                 vidurkis(duomenys, i);
-                rikiavimas (duomenys, nr);
                 if (i==0) remelis(duomenys, i, did_vard, did_pav);
                 spausdinimas(duomenys, i, did_vard, did_pav);
+                rikiavimas (duomenys, nr);
             }
 
         }
