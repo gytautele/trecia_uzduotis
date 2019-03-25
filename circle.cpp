@@ -61,7 +61,7 @@ double mediana(vector<mok> duomenys, int i, double &med) {
         throw std::domain_error ("negalima skaiciuoti medianos tusciam vektoriui");
     }
 
-    std:: sort(duomenys[i].nd.begin(), duomenys[i].nd.end(), std::greater<int>());
+    std::sort(duomenys[i].nd.begin(), duomenys[i].nd.end(), std::greater<int>());
 
     if (duomenys[i].paz_sk% 2 != 0)
     {
@@ -297,23 +297,58 @@ void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j) {
         duomenys[sk-1].paz_sk--; //sumazinamas pazymiu skaicius, nes skaiciuoja ir egzamina
     }
 }
-//-------------------------
-void rezultatu_skaidymas(vector<mok> &duomenys, vector<mok> &silpni) {
+//----------------------------
+vector<mok> rasksilpnus(vector<mok>& duomenys) {
 
-    for (int j=0; j<5; j++)
+    vector<mok> silpni;
+    vector<mok>::size_type i = 0;
+    int parenkamas=0;
+
+    galutinis(duomenys);
+
+    for (int i=0; i<duomenys.size(); i++)
     {
-        for (int i=0; i<duomenys.size(); i++)
-        {
-            vidurkis(duomenys, i);
-            duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
+        if (duomenys[i].galutinis1<5)
+        silpni.push_back(duomenys[i]);
 
-            if (duomenys[i].galutinis1<5) {
-                silpni.push_back(duomenys[i]);
-                duomenys.erase(duomenys.begin() + i);
+        else 
+            {
+                parenkamas++;
             }
-        }
     }
 
+    std::sort(duomenys.begin(), duomenys.end(), lyginimas);
+    duomenys.resize(parenkamas);
+    return silpni;
+}
+//----------------------------
+vector<mok> iterpkkietus(vector<mok>& duomenys, int &nr) {
+
+    vector<mok> silpni;
+    int parenkamas=0;
+
+    int h=duomenys.size();
+
+    galutinis(duomenys);
+
+    for (int i=0; i<h*2; i++)
+    {
+        if (duomenys[i].galutinis1<5)
+        {       
+            silpni.push_back(duomenys[i]);
+        }
+        
+        else 
+            {
+                parenkamas++;
+                duomenys.insert(duomenys.begin(), duomenys[i]);
+                //i++; //jei atsikomentini, tai tada ne visus praeina
+            }
+    }
+
+    //std::sort(duomenys.begin(), duomenys.end(), lyginimas);
+    duomenys.resize(parenkamas);
+    return silpni;
 }
 //------------------------
 void spausdinu (vector <mok> silpni, vector<mok> duomenys)
@@ -340,7 +375,30 @@ void spausdinu (vector <mok> silpni, vector<mok> duomenys)
     outfil.close();
 
 }
-//----------------------
+//----------------------------------------
+void galutinis (vector<mok>& duomenys)
+{
+    for (int i=0; i<duomenys.size(); i++)
+    {
+        vidurkis(duomenys, i);
+        duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
+    }
+}
+//------------------------------
+bool lyginimas(mok stud1, mok stud2)
+{
+    return stud1.galutinis1 > stud2.galutinis1;
+}
+//-----------------------
+vector<mok> raskminkstus (vector<mok>& duomenys)
+{
+    galutinis(duomenys);
+    vector<mok>::iterator it = stable_partition(duomenys.begin(), duomenys.end(), negavoskolos);
+    vector<mok> silpni(it, duomenys.end());
+    duomenys.erase(it, duomenys.end());
+    return silpni; // gražina studentus gavusius skola
+}
+//--------------------------
 bool gavoskola (const mok & i)
 {
     return i.galutinis1<5;
@@ -351,19 +409,3 @@ bool negavoskolos (const mok & i)
     return i.galutinis1>=5;
 }
 //-----------------------
-void galutinis (vector<mok>& duomenys)
-{
-    for (int i=0; i<duomenys.size(); i++)
-    {
-        vidurkis(duomenys, i);
-        duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 * (double) duomenys[i].egz;
-    }
-}
-//-----------------------
-vector<mok> raskminkstus (vector<mok>& duomenys)
-{
-    vector<mok>::iterator it = stable_partition(duomenys.begin(), duomenys.end(), negavoskolos);
-    vector<mok> silpni(it, duomenys.end());
-    duomenys.erase(it, duomenys.end());
-    return silpni; // grąžina studentus gavusius skolą
-}

@@ -11,8 +11,6 @@ int main () {
     cout << "Jei norite generuoti 5 tekstinius failus, spauskite 5. Jei ne- bet koki kita skaiciu:" << endl;
     cin >> jj;
 
-    auto startas = std::chrono::system_clock::now();
-
     std::remove("silpnuoliai.md");
     std::remove("kietiakai.md");
 
@@ -23,31 +21,22 @@ int main () {
 
     if (jj==5) {
 
-        for (int i=0; i<5; i++)
+        for (int i=0; i<1; i++)
         {
-            nr=nr*10;
+            nr=100;
             generuoti_txt(i, nr);
             skaitymas_gen (duomenys, i, sk, h, j);
-            auto pabaiga = std::chrono::system_clock::now();
-            auto uztruko = std::chrono::duration_cast< std::chrono::duration<double> > (pabaiga - startas).count();
-            cout << i+1 << "-ojo failo generavimas ir skaitymas uztruko: " << uztruko << " sekundziu" << endl;
-
         }
-        auto startas1 = std::chrono::system_clock::now();
 
-
-        galutinis(duomenys);
-        silpni=raskminkstus(duomenys);
-        //rezultatu_skaidymas (duomenys, silpni);
+        auto startas = std::chrono::system_clock::now();
+        //silpni=rasksilpnus(duomenys);
+        //silpni=raskminkstus(duomenys);
+        silpni=iterpkkietus(duomenys, nr);
+        auto pabaiga = std::chrono::system_clock::now();
+        auto uztruko = std::chrono::duration_cast< std::chrono::duration<double> > (pabaiga - startas).count();
+        cout << "Rezultatu skaidymas uztruko: " << uztruko << " sekundziu" << endl;
 
         spausdinu(silpni, duomenys);
-
-        auto pabaiga2 = std::chrono::system_clock::now();
-        auto uztruko1 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga2 - startas1).count();
-        cout << "Rezultatu skaidymas i du tekstinius failus uztruko: " << uztruko1 << " sekundziu" << endl;
-        auto pabaiga3 = std::chrono::system_clock::now();
-        auto uztruko3 = std::chrono::duration_cast< std::chrono::duration<double> >(pabaiga3 - startas).count();
-        cout << "Visos programos veikimas: " << uztruko3 << " sekundziu" << endl;
     }
 
     if (jj==5) return 0;

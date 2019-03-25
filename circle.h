@@ -18,6 +18,7 @@
 #include <random>
 #include <deque>
 #include <vector>
+#include <bits/stdc++.h>
 
 using std::cout;
 using std::string;
@@ -56,11 +57,13 @@ void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav);
 void rikiavimas (vector<mok> &duomenys, int &nr);
 void generuoti_txt(int i, int &nr);
 void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j);
-void rezultatu_skaidymas(vector<mok> &duomenys, vector<mok> &silpni);
 void spausdinu (vector<mok> silpni, vector<mok> duomenys);
 bool gavoskola (const mok & i);
 bool negavoskolos (const mok & i);
 vector<mok> raskminkstus(vector<mok>& duomenys);
 void galutinis (vector<mok>& duomenys);
+vector<mok> rasksilpnus(vector<mok>& duomenys);
+bool lyginimas(mok stud1, mok stud2);
+vector<mok> iterpkkietus(vector<mok>& duomenys, int &nr);
 
 #endif //PENKTA_SU_VEKTORIAIS_CIRCLE_H
