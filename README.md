@@ -185,9 +185,9 @@ Visos programos veikimas: 6.82846 sekundziu
 
 Atliekant programą pagal 2 strategiją su vektoriais, programos darbas tikrai ilgas. Modifikavus tą pačią programą, panaudojus algoritmą stable_partition programos sparta žymiai didesnė. Išvada: algoritmai gali žymiai paspartinti programos veikimą.
  
-### Papildoma užduotis
+## Papildoma užduotis
 
-#### Užduotis buvo atlikta 3-mis budais:
+#### Užduotis buvo atlikta 3-mis būdais:
 
 1) rasksilpnus(duomenys):
 * pushback'inama į silpnus, tada panaudojamas rikiavimas pagal galutinį pažymį ir naudojama resize();
@@ -237,6 +237,6 @@ Su 100 000:
 Rezultatu skaidymas uztruko: 0.411112 sekundziu
 ```
 
-### Analizes komentaras
+### Analizės komentaras
 
 Lyginant funkcijų pranašumą tarpusavyje, kai dribama tik su vektoriais, greičiausiai veikia 2 funkcija. Antroje vietoje pagal spartą yra 1 funkcija, o 3-čia žymiai nusileidžia spartos atžvilgiu likusioms dviems. Lyginant vektorius su deque, bet kuriuo atveju, deque lenkia vektorių pagal spartą. Išvada: kai yra dirbama su deque ir naudojama push_front funkcija programa veikia greičiausiai.
