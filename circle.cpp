@@ -327,11 +327,9 @@ vector<mok> iterpkkietus(vector<mok>& duomenys, int &nr) {
     vector<mok> silpni;
     int parenkamas=0;
 
-    int h=duomenys.size();
-
     galutinis(duomenys);
 
-    for (int i=0; i<h*2; i++)
+    for (int i=0; i<duomenys.size(); i++)
     {
         if (duomenys[i].galutinis1<5)
         {       
@@ -342,12 +340,12 @@ vector<mok> iterpkkietus(vector<mok>& duomenys, int &nr) {
             {
                 parenkamas++;
                 duomenys.insert(duomenys.begin(), duomenys[i]);
-                //i++; //jei atsikomentini, tai tada ne visus praeina
+                i++;
             }
     }
 
-    //std::sort(duomenys.begin(), duomenys.end(), lyginimas);
     duomenys.resize(parenkamas);
+    duomenys.shrink_to_fit();
     return silpni;
 }
 //------------------------

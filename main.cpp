@@ -23,7 +23,7 @@ int main () {
 
         for (int i=0; i<1; i++)
         {
-            nr=100;
+            nr=100000;
             generuoti_txt(i, nr);
             skaitymas_gen (duomenys, i, sk, h, j);
         }
