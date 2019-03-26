@@ -185,3 +185,58 @@ Visos programos veikimas: 6.82846 sekundziu
 
 Atliekant programą pagal 2 strategiją su vektoriais, programos darbas tikrai ilgas. Modifikavus tą pačią programą, panaudojus algoritmą stable_partition programos sparta žymiai didesnė. Išvada: algoritmai gali žymiai paspartinti programos veikimą.
  
+### Papildoma užduotis
+
+#### Užduotis buvo atlikta 3-mis budais:
+
+1) rasksilpnus(duomenys):
+* pushback'inama į silpnus, tada panaudojamas rikiavimas pagal galutinį pažymį ir naudojama resize();
+
+``` shell
+Su 10 000:
+Rezultatu skaidymas uztruko: 0.220801 sekundziu
+Su 100 000:
+Rezultatu skaidymas uztruko: 2.89496 sekundziu
+```
+
+2) raskminkstus(duomenys):
+* pushback'inama į silpnus ir ištrinama iš bendro sąrašo;
+
+``` shell
+Su 10 000:
+Rezultatu skaidymas uztruko: 0.0241977 sekundziu
+Su 100 000:
+Rezultatu skaidymas uztruko: 0.441977 sekundziu
+```
+
+3) iterpkkietus(duomenys):
+* pushback'inama į silpnus, insert'inama į priekį ir resiz'inama pagal suskaičiuotą kietų kiekį;
+
+``` shell
+Su 10 000:
+Rezultatu skaidymas uztruko: 35.0112 sekundziu
+Su 100 000:
+Rezultatu skaidymas uztruko: 487.7854 sekundziu
+```
+
+4) Kai naudojama deque (testuojama 3 funkcija su insert()):
+
+``` shell
+Su 10 000:
+Rezultatu skaidymas uztruko: 0.0512288 sekundziu
+Su 100 000:
+Rezultatu skaidymas uztruko: 0.429334 sekundziu
+```
+
+5) Kai naudojama deque (testuojama 3 funkcija su push_front()):
+
+``` shell
+Su 10 000:
+Rezultatu skaidymas uztruko: 0.0481059 sekundziu
+Su 100 000:
+Rezultatu skaidymas uztruko: 0.411112 sekundziu
+```
+
+### Analizes komentaras
+
+Lyginant funkcijų pranašumą tarpusavyje, kai dribama tik su vektoriais, greičiausiai veikia 2 funkcija. Antroje vietoje pagal spartą yra 1 funkcija, o 3-čia žymiai nusileidžia spartos atžvilgiu likusioms dviems. Lyginant vektorius su deque, bet kuriuo atveju, deque lenkia vektorių pagal spartą. Išvada: kai yra dirbama su deque ir naudojama push_front funkcija programa veikia greičiausiai.
