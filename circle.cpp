@@ -14,13 +14,35 @@ int mok_sk (int &m)
     cin >> m;
     return m;
 }
-//----------------------------------------
-void ivedimas (deque<mok> &duomenys, int i) {
+//------------------------------------------
+void ivedimas (vector<mok> &duomenys, int i) {
 
-    cout << "Iveskite studento varda ir pavarde" << endl;
+    cout << "Iveskite studento varda:" << endl;
 
     cin >> duomenys[i].vardas;
+
+    for (int j=0; j<duomenys[i].vardas.size(); j++)
+    {
+        while (!isalpha(duomenys[i].vardas[j]))
+        {
+            cout << "Iveskite mokinio varda naudodami tik raides" << endl;
+            cin >> duomenys[i].vardas;
+        }
+    }
+    
+    cout << "Iveskite studento pavarde:" << endl;
+
     cin >> duomenys[i].pavarde;
+
+    for (int j=0; j<duomenys[i].pavarde.size(); j++)
+    {
+        while (!isalpha(duomenys[i].pavarde[j]))
+        {
+            cout << "Iveskite mokinio pavarde naudodami tik raides" << endl;
+            cin >> duomenys[i].pavarde;
+        }
+    }
+   
 }
 //----------------------------------------
 int pasirinkimas2() {
@@ -32,7 +54,7 @@ int pasirinkimas2() {
     return a;
 }
 //-----------------------------------------
-void ivedimas_rezultatu(deque<mok> &duomenys, int i) {
+void ivedimas_rezultatu(vector<mok> &duomenys, int i) {
     int b; //laikinas kintamasis pazymiui irasyti i vektoriu
 
     cout << "Iveskite namu darbu rezultatus. Kai noresite baigti - spauskite 0:" << endl;
@@ -52,9 +74,9 @@ void ivedimas_rezultatu(deque<mok> &duomenys, int i) {
 
 }
 //--------------------------------
-double mediana(deque<mok> duomenys, int i, double &med) {
+double mediana(vector<mok> duomenys, int i, double &med) {
 
-    typedef deque<double>::size_type dydis;
+    typedef vector<double>::size_type dydis;
     dydis size=duomenys[i].nd.size();
     if (size==0)
     {
@@ -76,7 +98,7 @@ double mediana(deque<mok> duomenys, int i, double &med) {
 
 }
 //------------------------------------
-void vidurkis(deque<mok> &duomenys, int i) {
+void vidurkis(vector<mok> &duomenys, int i) {
 
     while (duomenys[i].nd.empty())
     {
@@ -87,7 +109,7 @@ void vidurkis(deque<mok> &duomenys, int i) {
 
 }
 //--------------------------------------
-void generacija(deque<mok> &duomenys, int i) {
+void generacija(vector<mok> &duomenys, int i) {
 
     int kiek;
     int laik;
@@ -111,7 +133,7 @@ void generacija(deque<mok> &duomenys, int i) {
 
 }
 //----------------------------
-void remelis (deque<mok> &duomenys, int i, int &did_vard, int &did_pav)
+void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav)
 {
     if(duomenys[i].vardas.size()>did_vard)
         did_vard=duomenys[i].vardas.size();
@@ -132,7 +154,7 @@ void remelis (deque<mok> &duomenys, int i, int &did_vard, int &did_pav)
 
 }
 //----------------------------
-void spausdinimas(deque<mok> &duomenys, int i, int did_vard, int did_pav) {
+void spausdinimas(vector<mok> &duomenys, int i, int did_vard, int did_pav) {
 
     duomenys[i].galutinis1 = 0.4 * duomenys[i].vid + 0.6 *(double) duomenys[i].egz;
     duomenys[i].galutinis2 = 0.4 * duomenys[i].med + 0.6 * (double) duomenys[i].egz;
@@ -148,7 +170,7 @@ void spausdinimas(deque<mok> &duomenys, int i, int did_vard, int did_pav) {
     cout<<endl;
 }
 //-------------------------
-void skaitymas (deque<mok> &duomenys, int &nr) {
+void skaitymas (vector<mok> &duomenys, int &nr) {
 
     string temp;
     string eil, vard, pav;
@@ -204,7 +226,7 @@ void skaitymas (deque<mok> &duomenys, int &nr) {
 
 }
 //-------------------------
-void rikiavimas (deque<mok> &duomenys, int &nr)
+void rikiavimas (vector<mok> &duomenys, int &nr)
 {
     string p;
 
@@ -251,7 +273,7 @@ void generuoti_txt(int i, int &nr)
     outfile.close();
 }
 //--------------------------------------------------
-void skaitymas_gen (deque<mok> &duomenys, int &i, int &sk, int &h, int &j) {
+void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j) {
 
     string temp;
     string eil, vard, pav;
@@ -298,15 +320,15 @@ void skaitymas_gen (deque<mok> &duomenys, int &i, int &sk, int &h, int &j) {
     }
 }
 //----------------------------
-deque<mok> rasksilpnus(deque<mok>& duomenys) {
+vector<mok> rasksilpnus(vector<mok>& duomenys) {
 
-    deque<mok> silpni;
-    deque<mok>::size_type i = 0;
+    vector<mok> silpni;
+    vector<mok>::size_type i = 0;
     int parenkamas=0;
 
     galutinis(duomenys);
 
-    for (i; i<duomenys.size(); i++)
+    for (int i=0; i<duomenys.size(); i++)
     {
         if (duomenys[i].galutinis1<5)
         silpni.push_back(duomenys[i]);
@@ -322,9 +344,9 @@ deque<mok> rasksilpnus(deque<mok>& duomenys) {
     return silpni;
 }
 //----------------------------
-deque<mok> iterpkkietus(deque<mok>& duomenys, int &nr) {
+vector<mok> iterpkkietus(vector<mok>& duomenys, int &nr) {
 
-    deque<mok> silpni;
+    vector<mok> silpni;
     int parenkamas=0;
 
     galutinis(duomenys);
@@ -339,7 +361,7 @@ deque<mok> iterpkkietus(deque<mok>& duomenys, int &nr) {
         else 
             {
                 parenkamas++;
-                duomenys.push_front(duomenys[i]);
+                duomenys.insert(duomenys.begin(), duomenys[i]);
                 i++;
             }
     }
@@ -349,7 +371,7 @@ deque<mok> iterpkkietus(deque<mok>& duomenys, int &nr) {
     return silpni;
 }
 //------------------------
-void spausdinu (deque <mok> silpni, deque<mok> duomenys)
+void spausdinu (vector <mok> silpni, vector<mok> duomenys)
 {
     string file_name[2] = {"kietiakai.md", "silpnuoliai.md"};
 
@@ -374,7 +396,7 @@ void spausdinu (deque <mok> silpni, deque<mok> duomenys)
 
 }
 //----------------------------------------
-void galutinis (deque<mok>& duomenys)
+void galutinis (vector<mok>& duomenys)
 {
     for (int i=0; i<duomenys.size(); i++)
     {
@@ -388,11 +410,11 @@ bool lyginimas(mok stud1, mok stud2)
     return stud1.galutinis1 > stud2.galutinis1;
 }
 //-----------------------
-deque<mok> raskminkstus (deque<mok>& duomenys)
+vector<mok> raskminkstus (vector<mok>& duomenys)
 {
     galutinis(duomenys);
-    deque<mok>::iterator it = stable_partition(duomenys.begin(), duomenys.end(), negavoskolos);
-    deque<mok> silpni(it, duomenys.end());
+    vector<mok>::iterator it = stable_partition(duomenys.begin(), duomenys.end(), negavoskolos);
+    vector<mok> silpni(it, duomenys.end());
     duomenys.erase(it, duomenys.end());
     return silpni; // gražina studentus gavusius skola
 }

@@ -2,8 +2,8 @@
 
 int main () {
 
-    deque<mok> duomenys;
-    deque<mok> silpni;
+    vector<mok> duomenys;
+    vector<mok> silpni;
 
     double med=0;
 
@@ -23,7 +23,7 @@ int main () {
 
         for (int i=0; i<1; i++)
         {
-            nr=10000;
+            nr=100;
             generuoti_txt(i, nr);
             skaitymas_gen (duomenys, i, sk, h, j);
         }

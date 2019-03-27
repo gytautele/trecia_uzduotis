@@ -45,25 +45,25 @@ struct mok
 
 int pasirinkimas ();
 int mok_sk (int &m);
-void ivedimas (deque<mok> &duomenys, int i);
+void ivedimas (vector<mok> &duomenys, int i);
 int pasirinkimas2();
-void generacija(deque<mok> &duomenys, int i);
-void ivedimas_rezultatu(deque<mok> &duomenys, int i);
-double mediana(deque<mok> duomenys, int i, double &med);
-void vidurkis(deque<mok> &duomenys, int i);
-void spausdinimas(deque<mok> &duomenys, int i, int did_vard, int did_pav);
-void skaitymas (deque<mok> &duomenys, int &nr);
-void remelis (deque<mok> &duomenys, int i, int &did_vard, int &did_pav);
-void rikiavimas (deque<mok> &duomenys, int &nr);
+void generacija(vector<mok> &duomenys, int i);
+void ivedimas_rezultatu(vector<mok> &duomenys, int i);
+double mediana(vector<mok> duomenys, int i, double &med);
+void vidurkis(vector<mok> &duomenys, int i);
+void spausdinimas(vector<mok> &duomenys, int i, int did_vard, int did_pav);
+void skaitymas (vector<mok> &duomenys, int &nr);
+void remelis (vector<mok> &duomenys, int i, int &did_vard, int &did_pav);
+void rikiavimas (vector<mok> &duomenys, int &nr);
 void generuoti_txt(int i, int &nr);
-void skaitymas_gen (deque<mok> &duomenys, int &i, int &sk, int &h, int &j);
-void spausdinu (deque<mok> silpni, deque<mok> duomenys);
+void skaitymas_gen (vector<mok> &duomenys, int &i, int &sk, int &h, int &j);
+void spausdinu (vector<mok> silpni, vector<mok> duomenys);
 bool gavoskola (const mok & i);
 bool negavoskolos (const mok & i);
-deque<mok> raskminkstus(deque<mok>& duomenys);
-void galutinis (deque<mok>& duomenys);
-deque<mok> rasksilpnus(deque<mok>& duomenys);
+vector<mok> raskminkstus(vector<mok>& duomenys);
+void galutinis (vector<mok>& duomenys);
+vector<mok> rasksilpnus(vector<mok>& duomenys);
 bool lyginimas(mok stud1, mok stud2);
-deque<mok> iterpkkietus(deque<mok>& duomenys, int &nr);
+vector<mok> iterpkkietus(vector<mok>& duomenys, int &nr);
 
 #endif //PENKTA_SU_VEKTORIAIS_CIRCLE_H
