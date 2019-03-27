@@ -45,7 +45,17 @@ Vardas6 Pavarde6 8.3
 ```
 ## Programos paleidimas
 
-Jei norite išbandyti programą tereikia pasileisti CMakeLists.txt. Arba Makefile:
+### v0.1-v0.2
+
+Tereikia komandinėje eilutėje parašyti:
+```shell
+g++ -o test <programos_pavadinimas>*
+```
+*<programos_pavadinimas>-tai programa, kurią norite pasileisti, pvz.: main.cpp
+
+### v0.3 ir toliau
+
+Tereikia pasileisti CMakeLists.txt arba Makefile:
 
 ```shell
 Run:
