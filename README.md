@@ -36,6 +36,28 @@ Programos veikimo laikai:
 
 ```
 
+### Skirtumai tarp optimizacijos lygių
+
+O1:
+```
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.333424 s.
+100000 Apdorojimo laikas = 3.16221 s.
+```
+O2:
+```
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.294621 s.
+100000 Apdorojimo laikas = 3.294756 s.
+```
+O3:
+```
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.299814 s.
+100000 Apdorojimo laikas = 3.28211 s.
+```
+
 ### Analizės komentaras
 
-Struktūrų ir klasių veikimo sparta iš esmės beveik nesiskiria.
+* Struktūrų ir klasių veikimo sparta iš esmės beveik nesiskiria
+* Optimizacijos lygiai atlieka tik nežymius pakeitimus programos veikimo spartoje
