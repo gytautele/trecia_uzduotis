@@ -1,4 +1,4 @@
-#include "headers/main_header.h"
+#include "headers/main_header2.h"
 #include "headers/time.h"
 
 int main() {
@@ -12,7 +12,7 @@ int main() {
     out << "Programos veikimo laikai: " << endl;
     int skaicius = 10000;
     for (int i = 0; i < 2; i++) {
-        vector<duomenys> studentai, silpni;
+        vector<Studentas> studentai, silpni;
         Time laikas;
         laikas.Start_clock();
         studentai.reserve(skaicius);
