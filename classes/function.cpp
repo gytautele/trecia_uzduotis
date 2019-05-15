@@ -1,5 +1,32 @@
 #include "../headers/main_header.h"
 
+std::ostream& operator<<(std::ostream out, const duomenys& studentas)
+{
+    out << studentas.vardas() << studentas.pavarde() << studentas.galutinis() << endl;
+    return out;
+}
+
+duomenys& duomenys::operator=(const duomenys& studentas)
+{
+    if (&studentas == this) return *this;
+
+    vardas_ = studentas.vardas_;
+    pavarde_ = studentas.pavarde_;
+    egz_ = studentas.egz_;
+    galut_ = studentas.galut_;
+    nd_ = studentas.nd_;
+    return *this;
+}
+
+duomenys::duomenys(const duomenys& studentas)
+{
+    vardas_ = studentas.vardas_;
+    pavarde_ = studentas.pavarde_;
+    egz_ = studentas.egz_;
+    galut_ = studentas.galut_;
+    nd_ = studentas.nd_;
+}
+
 void duomenys::galutinis(char &pasirinkimas)
 {
     if (nd_.size() == 0)
