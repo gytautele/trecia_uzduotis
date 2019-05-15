@@ -1,5 +1,5 @@
-#include "main_header.h"
-#include "time.h"
+#include "../headers/main_header.h"
+#include "../headers/time.h"
 
 void Time::Start_clock()
 {

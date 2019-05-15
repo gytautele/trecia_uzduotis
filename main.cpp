@@ -1,5 +1,5 @@
-#include "main_header.h"
-#include "time.h"
+#include "headers/main_header.h"
+#include "headers/time.h"
 
 int main() {
 
@@ -29,5 +29,3 @@ int main() {
     return 0;
 
 }
-
-

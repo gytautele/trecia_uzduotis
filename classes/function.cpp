@@ -1,4 +1,4 @@
-#include "main_header.h"
+#include "../headers/main_header.h"
 
 void duomenys::galutinis(char &pasirinkimas)
 {

@@ -57,7 +57,6 @@ void skaitymas(vector <duomenys>&, int, char&);
 void ilgio_nustatymas(vector<duomenys>&, int&, int&);
 void isvedimas(vector <duomenys>&, vector <duomenys>&, int&, int&);
 void atrinkimas(vector <duomenys>&, vector<duomenys>&);
-void generavimas(std::ofstream&, int);
 void generavimas2();
 
 #endif //V1_1_MAIN_HEADER_H
