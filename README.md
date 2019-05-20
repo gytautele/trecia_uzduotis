@@ -13,6 +13,29 @@ Programa siekia:
 
 * Sugeneruojami tam tikro (šiuo atveju 10 000 ir 100 000) failai su šabloniniais studentų vardais ``Vardas0  Pavarde0  3 5 9 7 2 3 3 9 4 3 9``. Naudojant vektoriaus konteinerį pagal duotą formulę ``galutinis_pazymys = vidurkis * 0.4 + 0.6 * egzaminas;`` suskaičiuojamas kiekvieno studento galutinis balas. Naudojant bendrą studentų konteinerį ir "silpnų" konteinerį bei ``std::find_if, std::copy, std::back_inserter`` pagalbą, studentai atrenkami į "stiprius" ir "silpnus" (jei galutinis balas >5 - studentas stiprus, jei ne - silpnas).
 
+## Programos veikimo analizė (benchmarking.txt)
+
+Štai kaip atrodo programos spartos analizės tekstinis failas programą paleidus 4 kartus:
+
+```
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.31231 s.
+100000 Apdorojimo laikas = 3.17883 s.
+------------------------------------------------------------------------------:
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.185727 s.
+100000 Apdorojimo laikas = 1.70363 s.
+------------------------------------------------------------------------------:
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.157607 s.
+100000 Apdorojimo laikas = 1.64043 s.
+------------------------------------------------------------------------------:
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.180459 s.
+100000 Apdorojimo laikas = 1.56524 s.
+
+```
+
 ## [v1.1](https://github.com/gytautele/trecia_uzduotis/releases/tag/v1.1) 
 
 ```
@@ -51,29 +74,38 @@ Programos veikimo laikai:
 
 ### Skirtumai tarp optimizacijos lygių
 
+Norint pasileisti programą komandinėje eilutėje su flag'ais (čia parinkta su -O3) tereikia įrašyti ``g++ -O3 -o programa main.cpp classes/generavimas.cpp classes/function.cpp classes/timer.cpp``
+
+Be:
+```
+Programos veikimo laikai: 
+10000 Apdorojimo laikas = 0.31231 s.
+100000 Apdorojimo laikas = 3.17883 s.
+```
 O1:
 ```
 Programos veikimo laikai: 
-10000 Apdorojimo laikas = 0.333424 s.
-100000 Apdorojimo laikas = 3.16221 s.
+10000 Apdorojimo laikas = 0.185727 s.
+100000 Apdorojimo laikas = 1.70363 s.
 ```
 O2:
 ```
 Programos veikimo laikai: 
-10000 Apdorojimo laikas = 0.294621 s.
-100000 Apdorojimo laikas = 3.294756 s.
+10000 Apdorojimo laikas = 0.157607 s.
+100000 Apdorojimo laikas = 1.64043 s.
 ```
 O3:
 ```
 Programos veikimo laikai: 
-10000 Apdorojimo laikas = 0.299814 s.
-100000 Apdorojimo laikas = 3.28211 s.
+10000 Apdorojimo laikas = 0.180459 s.
+100000 Apdorojimo laikas = 1.56524 s.
 ```
 
 ### Analizės komentaras
 
 * Struktūrų ir klasių veikimo sparta iš esmės beveik nesiskiria
-* Optimizacijos lygiai atlieka tik nežymius pakeitimus programos veikimo spartoje
+* Optimizacijos lygiai žymiai spartina programos veikimą (beveik 2 kartus greičiau veikia programa)
+* Priklausomai nuo optimizacijos lygio, priklausomai didėja ir programos sparta
 
 ##  [v1.2](https://github.com/gytautele/trecia_uzduotis/releases/tag/v1.2)
 
@@ -194,7 +226,84 @@ public:
     ~Studentas() {}
 };
 ```
+##  [v2.0](https://github.com/gytautele/trecia_uzduotis/releases/tag/v2.0)
+
+### Doxygen
+
+* Programinės įrangos informacinių dokumentų rašymo įrankis
+* Visi Doxygen sugeneruoti failai saugomi Doxygen aplanke.
+* Vienas iš sugeneruotų pavyzdžių (paveldėjimo grafas):
+
+```   
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Time",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTime.html"];
+}
+```
+
+### Unit test'ai
+
+Norint pratestuoti programą reikia:
+* atsisiųsti catch.h failą (iš oficialios CLion svetainės, kadangi ten nuolat atnaujinama)
+* jį iclud'inti ``#include "headers/catch.h"`` į test.cpp failą
+* pasirašyti kelis testus funkcijoms, kurias norima testuoti
+* komandinėjė eilutėje parašyti komandą ``g++ test.cpp classes/function.cpp -o <programos pavadinimas>``
+* pasileisti testo rezultatus naudojant ``./<programos pavadinimas>``
+
+Štai kaip atrodo mano test.cpp:
+
+```
+#define CATCH_CONFIG_MAIN
+#include "headers/catch.h"
+#include "headers/main_header.h"
+#include "headers/time.h"
+
+TEST_CASE("Testas1")
+{
+    CHECK(kazkas("0") == 0); //gerai
+    CHECK(kazkas("ABC") == 0); //blogai
+    CHECK(kazkas("Test1234") == 0); //blogai
+}
+
+duomenys stud1;
+duomenys stud2;
+
+TEST_CASE("Testas2")
+{
+    stud1.galutinis() == 5;
+    CHECK(tikrinimas_5(stud1) == true); //gerai
+    stud2.galutinis() == 17;
+    CHECK(tikrinimas_5(stud2) == false); //blogai
+    stud2.galutinis() == 5;
+    CHECK(tikrinimas_5(stud2) == false); //gerai
+}
+```
+Testų rezultatai:
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test is a Catch v2.7.2 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Testas2
+-------------------------------------------------------------------------------
+test.cpp:17
+...............................................................................
+
+test.cpp:20: FAILED:
+  CHECK( tikrinimas_5(stud1) == true )
+with expansion:
+  false == true
+
+===============================================================================
+test cases: 2 | 1 passed | 1 failed //iš dviejų vienas praėjo
+assertions: 5 | 4 passed | 1 failed //iš 5 praėjo 4, vienas sufeilino
+```
 
 ## Programos paleidimas
 
-Norint pasileisti programą tereikia turėti CMakeLists.txt. Visi sugeneruoti failai, rezultatų failai ir programos analizės failas "benchmarking.txt" bus įrašytas į folderį "build".
+Nusikloninti repozitoriją `` git clone https://github.com/augustejurcyte/OOP_Trecia.git ``. Norint pasileisti programą tereikia turėti CMakeLists.txt. Visi sugeneruoti failai, rezultatų failai ir programos analizės failas "benchmarking.txt" (kuriame rašomi programos veikimo laikai) bus įrašytas į folderį "build".
