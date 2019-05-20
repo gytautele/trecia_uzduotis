@@ -306,4 +306,4 @@ assertions: 5 | 4 passed | 1 failed //iš 5 praėjo 4, vienas sufeilino
 
 ## Programos paleidimas
 
-Nusikloninti repozitoriją `` git clone https://github.com/augustejurcyte/OOP_Trecia.git ``. Norint pasileisti programą tereikia turėti CMakeLists.txt. Visi sugeneruoti failai, rezultatų failai ir programos analizės failas "benchmarking.txt" (kuriame rašomi programos veikimo laikai) bus įrašytas į folderį "build".
+Nusikloninti repozitoriją `` git clone https://github.com/gytautele/trecia_uzduotis.git ``. Norint pasileisti programą tereikia turėti CMakeLists.txt. Visi sugeneruoti failai, rezultatų failai ir programos analizės failas "benchmarking.txt" (kuriame rašomi programos veikimo laikai) bus įrašytas į folderį "build".
