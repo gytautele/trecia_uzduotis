@@ -1,4 +1,4 @@
-#include "../headers/main_header2.h"
+#include "../headers/main_header.h"
 #include "../headers/time.h"
 
 void Time::Start_clock()

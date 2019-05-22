@@ -94,4 +94,6 @@ void atrinkimas(vector <Studentas>&, vector<Studentas>&);
 
 void generavimas2();
 
+int kazkas(const char string1[]);
+
 #endif // FUNCTION

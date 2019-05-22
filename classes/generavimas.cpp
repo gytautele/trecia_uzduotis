@@ -1,4 +1,4 @@
-#include "../headers/main_header2.h"
+#include "../headers/main_header.h"
 //--------------------------------
 void generavimas(std::ofstream& in, int skaicius)
 {

@@ -38,7 +38,7 @@ private:
 public:
     duomenys(){}
     duomenys(const duomenys&);
-    duomenys(duomenys&& s) :
+    duomenys(duomenys&& s) :  //kodel 2 referencai???
             vardas_{s.vardas_},
             pavarde_{s.pavarde_},
             egz_{s.egz_},
@@ -95,5 +95,6 @@ void isvedimas(vector <duomenys>&, vector <duomenys>&, int&, int&);
 void atrinkimas(vector <duomenys>&, vector<duomenys>&);
 void generavimas(std::ofstream&, int);
 void generavimas2();
+int kazkas(const char string1[]);
 
 #endif //V1_1_MAIN_HEADER_H
